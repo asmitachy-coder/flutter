@@ -1,96 +1,116 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Bit());
+  runApp(const MyApp());
 }
 
-class Bit extends StatelessWidget {
-  const Bit({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //material app is not root app
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProfileCard(),
+    );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //reference
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        leading: Icon(Icons.menu),
-        centerTitle: true,
-        title: Text(
-          'Discover',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBDbR5uMAeqEu2SqYFM4SG1yaqaAn8kPeVJA&s",
-              ),
-            ),
+      backgroundColor: Colors.grey.shade300,
+      body: Center(
+        child: Container(
+          width: 300,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey.shade400),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                spacing: 10,
-                children: [
-                  Text('Popular'),
-                  //for Spacing one is   ##sizebox and another is spacing provided in row widget
-                  Text('Featured'),
-                  // SizedBox(width: 10),
-                  Text('Most Visited'),
-                  Text('Europe'),
-                  Text('Asia'),
-                  Text('Popular'),
-                ],
-              ),
-
-              //Container, Column /Row, Basic UI Widgets: Text, Image, Icon, SizedBox, Padding, Button (Elevated,Text, Outline)
-              Column(
-                spacing: 10,
-                children: [
-                  Container(height: 100, width: 100, color: Colors.red),
-                  // SizedBox(height: 10),
-                  Container(height: 100, width: 100, color: Colors.green),
-                  // SizedBox(height: 100),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.yellow,
-                    ),
+              // Profile Image
+              Container(
+                height: 180,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/asmita.jpg"),
+                    fit: BoxFit.cover,
                   ),
-
-                  Image.asset("assets/logo.jpg.jpg", height: 200, width: 200),
-                ],
+                ),
               ),
 
-              //for text
-              Text("fsf"),
-              Icon(Icons.add),
-              ElevatedButton(onPressed: () {}, child: Text("Login")),
-              OutlinedButton(onPressed: () {}, child: Text("Outline")),
-              TextButton(onPressed: () {}, child: Text("Text Button")),
+              const SizedBox(height: 12),
+
+              // Name
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  "Oleg Ivanov",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 6),
+
+              // Title
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  "product Designer",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // Social Icons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  socialIcon(Icons.facebook),
+                  socialIcon(Icons.camera_alt), // Instagram
+                  socialIcon(Icons.alternate_email), // Twitter
+                  socialIcon(Icons.work), // LinkedIn
+                ],
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget socialIcon(IconData icon) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Icon(icon, size: 20),
     );
   }
 }
